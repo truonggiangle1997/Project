@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_recommendations"
+            android:icon="@drawable/baseline_whatshot_24"
+            android:title="Truyện đề xuất"
+            android:iconTint="#F57C00"/>
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/baseline_list_24"
+            android:title="Danh sách truyện"
+            android:iconTint="#F57C00"/>
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/baseline_search_24"
+            android:title="Tìm kiếm"
+            android:iconTint="#F57C00"/>
+        <item
+            android:id="@+id/nav_tag"
+            android:icon="@drawable/baseline_layers_24"
+            android:title="Thể loại"
+            android:iconTint="#F57C00"/>
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/baseline_star_border_24"
+            android:iconTint="#F57C00"
+            android:title="Theo dõi"
+            android:visible="false" />
+        <!--<item-->
+            <!--android:id="@+id/nav_pinned"-->
+            <!--android:icon="@drawable/baseline_attachment_24"-->
+            <!--android:iconTint="#F57C00"-->
+            <!--android:title="Đánh dấu"-->
+            <!--android:visible="false" />-->
+    </group>
+
+    <item android:title="Tài khoản">
+        <menu>
+            <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/baseline_account_circle_24"
+            android:title="Đăng nhập" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_first_page_24"
+                android:title="Đăng xuất"
+                android:visible="false" />
+            <item
+                android:id="@+id/nav_manga_management"
+                android:icon="@drawable/baseline_folder_open_24"
+                android:title="Quản lý truyện"
+                android:visible="false" />
+        </menu>
+    </item>
+
+</menu>
