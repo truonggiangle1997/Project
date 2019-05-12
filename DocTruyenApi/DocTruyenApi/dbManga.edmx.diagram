@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="92ecade4d58d484bb51f56f9228a92c8" Name="Diagram1">
+        <EntityTypeShape EntityType="dbMangaModel.Author" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Chapter" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Genre" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Manga" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Page" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Role" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.Status" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMangaModel.User" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbMangaModel.FK_Mangas_Authors" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.FK_Chapters_Mangas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.FK_Pages_Chapters" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.FK_Mangas_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.Mangas_Genres" ManuallyRouted="false" />
+        <AssociationConnector Association="dbMangaModel.Mangas_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

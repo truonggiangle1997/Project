@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbMangaModelStoreContainer" CdmEntityContainer="dbMangaEntities">
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="dbMangaModel.Author">
+        <MappingFragment StoreEntitySet="Authors">
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+          <ScalarProperty Name="authorName" ColumnName="authorName" />
+          <ScalarProperty Name="facebook" ColumnName="facebook" />
+          <ScalarProperty Name="twitter" ColumnName="twitter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chapters">
+      <EntityTypeMapping TypeName="dbMangaModel.Chapter">
+        <MappingFragment StoreEntitySet="Chapters">
+          <ScalarProperty Name="chapterId" ColumnName="chapterId" />
+          <ScalarProperty Name="mangaId" ColumnName="mangaId" />
+          <ScalarProperty Name="chapterNumber" ColumnName="chapterNumber" />
+          <ScalarProperty Name="chapterName" ColumnName="chapterName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="dbMangaModel.Genre">
+        <MappingFragment StoreEntitySet="Genres">
+          <ScalarProperty Name="genreId" ColumnName="genreId" />
+          <ScalarProperty Name="genreName" ColumnName="genreName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mangas">
+      <EntityTypeMapping TypeName="dbMangaModel.Manga">
+        <MappingFragment StoreEntitySet="Mangas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="mangaId" ColumnName="mangaId" />
+          <ScalarProperty Name="mangaName" ColumnName="mangaName" />
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+          <ScalarProperty Name="describe" ColumnName="describe" />
+          <ScalarProperty Name="cover" ColumnName="cover" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="dbMangaModel.Page">
+        <MappingFragment StoreEntitySet="Pages">
+          <ScalarProperty Name="pageId" ColumnName="pageId" />
+          <ScalarProperty Name="chapterId" ColumnName="chapterId" />
+          <ScalarProperty Name="pageNumber" ColumnName="pageNumber" />
+          <ScalarProperty Name="link1" ColumnName="link1" />
+          <ScalarProperty Name="link2" ColumnName="link2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="dbMangaModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="dbMangaModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="dbMangaModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="condition" ColumnName="condition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Mangas_Genres" TypeName="dbMangaModel.Mangas_Genres" StoreEntitySet="Mangas_Genres">
+      <EndProperty Name="Genres">
+        <ScalarProperty Name="genreId" ColumnName="genreId" />
+      </EndProperty>
+      <EndProperty Name="Mangas">
+        <ScalarProperty Name="mangaId" ColumnName="mangaId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Mangas_Users" TypeName="dbMangaModel.Mangas_Users" StoreEntitySet="Mangas_Users">
+      <EndProperty Name="Mangas">
+        <ScalarProperty Name="mangaId" ColumnName="mangaId" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="userId" ColumnName="userId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

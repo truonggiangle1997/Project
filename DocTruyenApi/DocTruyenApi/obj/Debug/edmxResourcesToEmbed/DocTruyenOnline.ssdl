@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMangaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="MaChapter" />
+    </Key>
+    <Property Name="MaChapter" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MaTruyen" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TenChapter" Type="nvarchar" MaxLength="50" />
+    <Property Name="Link" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="MaTacGia" />
+    </Key>
+    <Property Name="MaTacGia" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TenTacGia" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Facebook" Type="nvarchar" MaxLength="50" />
+    <Property Name="Twitter" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TheLoai">
+    <Key>
+      <PropertyRef Name="MaTheLoai" />
+    </Key>
+    <Property Name="MaTheLoai" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TenTheLoai" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TinhTrang">
+    <Key>
+      <PropertyRef Name="MaTinhTrang" />
+    </Key>
+    <Property Name="MaTinhTrang" Type="int" Nullable="false" />
+    <Property Name="TenTinhTrang" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Truyen">
+    <Key>
+      <PropertyRef Name="MaTruyen" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaTruyen" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TenTruyen" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaTacGia" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MaTinhTrang" Type="int" Nullable="false" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
+    <Property Name="AnhBia" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Truyen_TheLoai">
+    <Key>
+      <PropertyRef Name="MaTruyen" />
+      <PropertyRef Name="MaTheLoai" />
+    </Key>
+    <Property Name="MaTruyen" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MaTheLoai" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Chapter_Truyen">
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="1" />
+    <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Truyen">
+        <PropertyRef Name="MaTruyen" />
+      </Principal>
+      <Dependent Role="Chapter">
+        <PropertyRef Name="MaTruyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TacGia">
+    <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="MaTacGia" />
+      </Principal>
+      <Dependent Role="Truyen">
+        <PropertyRef Name="MaTacGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TheLoai_TheLoai">
+    <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="1" />
+    <End Role="Truyen_TheLoai" Type="Self.Truyen_TheLoai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLoai">
+        <PropertyRef Name="MaTheLoai" />
+      </Principal>
+      <Dependent Role="Truyen_TheLoai">
+        <PropertyRef Name="MaTheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TheLoai_Truyen">
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="1" />
+    <End Role="Truyen_TheLoai" Type="Self.Truyen_TheLoai" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Truyen">
+        <PropertyRef Name="MaTruyen" />
+      </Principal>
+      <Dependent Role="Truyen_TheLoai">
+        <PropertyRef Name="MaTruyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TinhTrang">
+    <End Role="TinhTrang" Type="Self.TinhTrang" Multiplicity="1" />
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhTrang">
+        <PropertyRef Name="MaTinhTrang" />
+      </Principal>
+      <Dependent Role="Truyen">
+        <PropertyRef Name="MaTinhTrang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbMangaModelStoreContainer">
+    <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TheLoai" EntityType="Self.TheLoai" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TinhTrang" EntityType="Self.TinhTrang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Truyen" EntityType="Self.Truyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Truyen_TheLoai" EntityType="Self.Truyen_TheLoai" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chapter_Truyen" Association="Self.FK_Chapter_Truyen">
+      <End Role="Truyen" EntitySet="Truyen" />
+      <End Role="Chapter" EntitySet="Chapter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TacGia" Association="Self.FK_Truyen_TacGia">
+      <End Role="TacGia" EntitySet="TacGia" />
+      <End Role="Truyen" EntitySet="Truyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TheLoai_TheLoai" Association="Self.FK_Truyen_TheLoai_TheLoai">
+      <End Role="TheLoai" EntitySet="TheLoai" />
+      <End Role="Truyen_TheLoai" EntitySet="Truyen_TheLoai" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TheLoai_Truyen" Association="Self.FK_Truyen_TheLoai_Truyen">
+      <End Role="Truyen" EntitySet="Truyen" />
+      <End Role="Truyen_TheLoai" EntitySet="Truyen_TheLoai" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TinhTrang" Association="Self.FK_Truyen_TinhTrang">
+      <End Role="TinhTrang" EntitySet="TinhTrang" />
+      <End Role="Truyen" EntitySet="Truyen" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

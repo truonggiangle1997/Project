@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMangaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="authorId" />
+    </Key>
+    <Property Name="authorId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="authorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="facebook" Type="nvarchar" MaxLength="300" />
+    <Property Name="twitter" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Chapters">
+    <Key>
+      <PropertyRef Name="chapterId" />
+    </Key>
+    <Property Name="chapterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mangaId" Type="nvarchar" MaxLength="20" />
+    <Property Name="chapterNumber" Type="int" />
+    <Property Name="chapterName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="genreId" />
+    </Key>
+    <Property Name="genreId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="genreName" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mangas">
+    <Key>
+      <PropertyRef Name="mangaId" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mangaId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="mangaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="authorId" Type="nvarchar" MaxLength="20" />
+    <Property Name="statusId" Type="int" Nullable="false" />
+    <Property Name="describe" Type="nvarchar" MaxLength="2000" />
+    <Property Name="cover" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Mangas_Genres">
+    <Key>
+      <PropertyRef Name="mangaId" />
+      <PropertyRef Name="genreId" />
+    </Key>
+    <Property Name="mangaId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="genreId" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mangas_Users">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="mangaId" />
+    </Key>
+    <Property Name="userId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="mangaId" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pages">
+    <Key>
+      <PropertyRef Name="pageId" />
+    </Key>
+    <Property Name="pageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="chapterId" Type="int" />
+    <Property Name="pageNumber" Type="int" />
+    <Property Name="link1" Type="nvarchar" MaxLength="2000" />
+    <Property Name="link2" Type="nvarchar" MaxLength="2000" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" Nullable="false" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="statusId" />
+    </Key>
+    <Property Name="statusId" Type="int" Nullable="false" />
+    <Property Name="statusName" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varbinary(max)" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="roleId" Type="int" />
+    <Property Name="condition" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Chapters_Mangas">
+    <End Role="Mangas" Type="Self.Mangas" Multiplicity="0..1" />
+    <End Role="Chapters" Type="Self.Chapters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mangas">
+        <PropertyRef Name="mangaId" />
+      </Principal>
+      <Dependent Role="Chapters">
+        <PropertyRef Name="mangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Authors">
+    <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+    <End Role="Mangas" Type="Self.Mangas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="authorId" />
+      </Principal>
+      <Dependent Role="Mangas">
+        <PropertyRef Name="authorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Genres_Genres">
+    <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+    <End Role="Mangas_Genres" Type="Self.Mangas_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genres">
+        <PropertyRef Name="genreId" />
+      </Principal>
+      <Dependent Role="Mangas_Genres">
+        <PropertyRef Name="genreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Genres_Mangas">
+    <End Role="Mangas" Type="Self.Mangas" Multiplicity="1" />
+    <End Role="Mangas_Genres" Type="Self.Mangas_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mangas">
+        <PropertyRef Name="mangaId" />
+      </Principal>
+      <Dependent Role="Mangas_Genres">
+        <PropertyRef Name="mangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Mangas" Type="Self.Mangas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusId" />
+      </Principal>
+      <Dependent Role="Mangas">
+        <PropertyRef Name="statusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Users_Mangas">
+    <End Role="Mangas" Type="Self.Mangas" Multiplicity="1" />
+    <End Role="Mangas_Users" Type="Self.Mangas_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mangas">
+        <PropertyRef Name="mangaId" />
+      </Principal>
+      <Dependent Role="Mangas_Users">
+        <PropertyRef Name="mangaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mangas_Users_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Mangas_Users" Type="Self.Mangas_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Mangas_Users">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pages_Chapters">
+    <End Role="Chapters" Type="Self.Chapters" Multiplicity="0..1" />
+    <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chapters">
+        <PropertyRef Name="chapterId" />
+      </Principal>
+      <Dependent Role="Pages">
+        <PropertyRef Name="chapterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbMangaModelStoreContainer">
+    <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chapters" EntityType="Self.Chapters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mangas" EntityType="Self.Mangas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mangas_Genres" EntityType="Self.Mangas_Genres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mangas_Users" EntityType="Self.Mangas_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chapters_Mangas" Association="Self.FK_Chapters_Mangas">
+      <End Role="Mangas" EntitySet="Mangas" />
+      <End Role="Chapters" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Authors" Association="Self.FK_Mangas_Authors">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Mangas" EntitySet="Mangas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Genres_Genres" Association="Self.FK_Mangas_Genres_Genres">
+      <End Role="Genres" EntitySet="Genres" />
+      <End Role="Mangas_Genres" EntitySet="Mangas_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Genres_Mangas" Association="Self.FK_Mangas_Genres_Mangas">
+      <End Role="Mangas" EntitySet="Mangas" />
+      <End Role="Mangas_Genres" EntitySet="Mangas_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Status" Association="Self.FK_Mangas_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Mangas" EntitySet="Mangas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Users_Mangas" Association="Self.FK_Mangas_Users_Mangas">
+      <End Role="Mangas" EntitySet="Mangas" />
+      <End Role="Mangas_Users" EntitySet="Mangas_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mangas_Users_Users" Association="Self.FK_Mangas_Users_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Mangas_Users" EntitySet="Mangas_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pages_Chapters" Association="Self.FK_Pages_Chapters">
+      <End Role="Chapters" EntitySet="Chapters" />
+      <End Role="Pages" EntitySet="Pages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

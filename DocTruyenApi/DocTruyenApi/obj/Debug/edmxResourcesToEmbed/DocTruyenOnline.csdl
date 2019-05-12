@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMangaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="MaChapter" />
+    </Key>
+    <Property Name="MaChapter" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTruyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenChapter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Truyen" Relationship="Self.FK_Chapter_Truyen" FromRole="Chapter" ToRole="Truyen" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="MaTacGia" />
+    </Key>
+    <Property Name="MaTacGia" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenTacGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Twitter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Truyens" Relationship="Self.FK_Truyen_TacGia" FromRole="TacGia" ToRole="Truyen" />
+  </EntityType>
+  <EntityType Name="TheLoai">
+    <Key>
+      <PropertyRef Name="MaTheLoai" />
+    </Key>
+    <Property Name="MaTheLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenTheLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Truyens" Relationship="Self.Truyen_TheLoai" FromRole="TheLoai" ToRole="Truyen" />
+  </EntityType>
+  <EntityType Name="TinhTrang">
+    <Key>
+      <PropertyRef Name="MaTinhTrang" />
+    </Key>
+    <Property Name="MaTinhTrang" Type="Int32" Nullable="false" />
+    <Property Name="TenTinhTrang" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Truyens" Relationship="Self.FK_Truyen_TinhTrang" FromRole="TinhTrang" ToRole="Truyen" />
+  </EntityType>
+  <EntityType Name="Truyen">
+    <Key>
+      <PropertyRef Name="MaTruyen" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaTruyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenTruyen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTacGia" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTinhTrang" Type="Int32" Nullable="false" />
+    <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AnhBia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapter_Truyen" FromRole="Truyen" ToRole="Chapter" />
+    <NavigationProperty Name="TacGia" Relationship="Self.FK_Truyen_TacGia" FromRole="Truyen" ToRole="TacGia" />
+    <NavigationProperty Name="TinhTrang" Relationship="Self.FK_Truyen_TinhTrang" FromRole="Truyen" ToRole="TinhTrang" />
+    <NavigationProperty Name="TheLoais" Relationship="Self.Truyen_TheLoai" FromRole="Truyen" ToRole="TheLoai" />
+  </EntityType>
+  <Association Name="FK_Chapter_Truyen">
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="1" />
+    <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Truyen">
+        <PropertyRef Name="MaTruyen" />
+      </Principal>
+      <Dependent Role="Chapter">
+        <PropertyRef Name="MaTruyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TacGia">
+    <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="MaTacGia" />
+      </Principal>
+      <Dependent Role="Truyen">
+        <PropertyRef Name="MaTacGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Truyen_TinhTrang">
+    <End Role="TinhTrang" Type="Self.TinhTrang" Multiplicity="1" />
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhTrang">
+        <PropertyRef Name="MaTinhTrang" />
+      </Principal>
+      <Dependent Role="Truyen">
+        <PropertyRef Name="MaTinhTrang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Truyen_TheLoai">
+    <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="*" />
+    <End Role="Truyen" Type="Self.Truyen" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="dbMangaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+    <EntitySet Name="TacGias" EntityType="Self.TacGia" />
+    <EntitySet Name="TheLoais" EntityType="Self.TheLoai" />
+    <EntitySet Name="TinhTrangs" EntityType="Self.TinhTrang" />
+    <EntitySet Name="Truyens" EntityType="Self.Truyen" />
+    <AssociationSet Name="FK_Chapter_Truyen" Association="Self.FK_Chapter_Truyen">
+      <End Role="Truyen" EntitySet="Truyens" />
+      <End Role="Chapter" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TacGia" Association="Self.FK_Truyen_TacGia">
+      <End Role="TacGia" EntitySet="TacGias" />
+      <End Role="Truyen" EntitySet="Truyens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Truyen_TinhTrang" Association="Self.FK_Truyen_TinhTrang">
+      <End Role="TinhTrang" EntitySet="TinhTrangs" />
+      <End Role="Truyen" EntitySet="Truyens" />
+    </AssociationSet>
+    <AssociationSet Name="Truyen_TheLoai" Association="Self.Truyen_TheLoai">
+      <End Role="TheLoai" EntitySet="TheLoais" />
+      <End Role="Truyen" EntitySet="Truyens" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbMangaModelStoreContainer" CdmEntityContainer="dbMangaEntities">
+    <EntitySetMapping Name="Chapters">
+      <EntityTypeMapping TypeName="dbMangaModel.Chapter">
+        <MappingFragment StoreEntitySet="Chapter">
+          <ScalarProperty Name="MaChapter" ColumnName="MaChapter" />
+          <ScalarProperty Name="MaTruyen" ColumnName="MaTruyen" />
+          <ScalarProperty Name="TenChapter" ColumnName="TenChapter" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TacGias">
+      <EntityTypeMapping TypeName="dbMangaModel.TacGia">
+        <MappingFragment StoreEntitySet="TacGia">
+          <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
+          <ScalarProperty Name="TenTacGia" ColumnName="TenTacGia" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheLoais">
+      <EntityTypeMapping TypeName="dbMangaModel.TheLoai">
+        <MappingFragment StoreEntitySet="TheLoai">
+          <ScalarProperty Name="MaTheLoai" ColumnName="MaTheLoai" />
+          <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TinhTrangs">
+      <EntityTypeMapping TypeName="dbMangaModel.TinhTrang">
+        <MappingFragment StoreEntitySet="TinhTrang">
+          <ScalarProperty Name="MaTinhTrang" ColumnName="MaTinhTrang" />
+          <ScalarProperty Name="TenTinhTrang" ColumnName="TenTinhTrang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Truyens">
+      <EntityTypeMapping TypeName="dbMangaModel.Truyen">
+        <MappingFragment StoreEntitySet="Truyen">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="MaTruyen" ColumnName="MaTruyen" />
+          <ScalarProperty Name="TenTruyen" ColumnName="TenTruyen" />
+          <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
+          <ScalarProperty Name="MaTinhTrang" ColumnName="MaTinhTrang" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="AnhBia" ColumnName="AnhBia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Truyen_TheLoai" TypeName="dbMangaModel.Truyen_TheLoai" StoreEntitySet="Truyen_TheLoai">
+      <EndProperty Name="TheLoai">
+        <ScalarProperty Name="MaTheLoai" ColumnName="MaTheLoai" />
+      </EndProperty>
+      <EndProperty Name="Truyen">
+        <ScalarProperty Name="MaTruyen" ColumnName="MaTruyen" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
