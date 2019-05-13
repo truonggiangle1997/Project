@@ -107,7 +107,12 @@ public class AddMangaActivity extends AppCompatActivity {
                         updateTag();
                     }
                 }, 200);
-                finish();
+                v.postDelayed(new Runnable() {
+                    public void run() {
+                        finish();
+                    }
+                }, 200);
+
 
             }
         });

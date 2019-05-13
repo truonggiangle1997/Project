@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        sp = getSharedPreferences("login", Context.MODE_PRIVATE);
-        checkLoginStatus();
         loadFragment(R.id.nav_recommendations);
     }
 
@@ -172,4 +170,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else LoggedOut();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+        checkLoginStatus();
+    }
 }
