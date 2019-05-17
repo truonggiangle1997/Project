@@ -1,8 +1,11 @@
 package com.example.manga;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +44,6 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 .load(manga.getCover())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(mangaViewHolder.ivCover);
-
 
     }
 

@@ -103,17 +103,21 @@ public class AddMangaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addManga();
                 v.postDelayed(new Runnable() {
+
+                    @Override
                     public void run() {
                         updateTag();
                     }
+
                 }, 200);
                 v.postDelayed(new Runnable() {
+
+                    @Override
                     public void run() {
                         finish();
                     }
+
                 }, 200);
-
-
             }
         });
     }
@@ -138,6 +142,7 @@ public class AddMangaActivity extends AppCompatActivity {
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spTag.setAdapter(arrayAdapter);
                     arrayAdapter.notifyDataSetChanged();
+                    updateTag();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

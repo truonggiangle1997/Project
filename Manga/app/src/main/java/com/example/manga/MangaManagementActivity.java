@@ -52,7 +52,6 @@ public class MangaManagementActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         mangaList = new ArrayList<>();
-//        loadMangaList();
         fabAddManga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

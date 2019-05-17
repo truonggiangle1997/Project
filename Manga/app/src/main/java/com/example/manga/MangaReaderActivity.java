@@ -81,9 +81,6 @@ public class MangaReaderActivity extends AppCompatActivity {
         fabBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent1 = new Intent(getApplicationContext(), MangaInfoActivity.class);
-//                intent1.putExtra("TITTLE", Tittle);
-//                startActivity(intent1);
                 finish();
             }
         });

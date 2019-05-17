@@ -87,23 +87,24 @@ public class MangaInfoActivity extends AppCompatActivity {
         mangaIdList = new ArrayList<>();
         if(sp.getBoolean("logged",false) == false){
             btnAdd_fav.setVisibility(View.INVISIBLE);
-        }
-        checkFavStatus();
-        btnAdd_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(favStatus == true){
-                    deleteFav();
-                    btnAdd_fav.setText("theo dõi");
-                    favStatus = false;
-                }else {
-                    addFav();
-                    btnAdd_fav.setText("bỏ theo dõi");
-                    favStatus = true;
-                }
+        }else {
+            checkFavStatus();
+            btnAdd_fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(favStatus == true){
+                        deleteFav();
+                        btnAdd_fav.setText("theo dõi");
+                        favStatus = false;
+                    }else {
+                        addFav();
+                        btnAdd_fav.setText("bỏ theo dõi");
+                        favStatus = true;
+                    }
 
-            }
-        });
+                }
+            });
+        }
         tvManga_info_author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +264,7 @@ public class MangaInfoActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         Volley.getInstance().addToRequestQueue(jsonArrayRequest);
@@ -277,7 +278,7 @@ public class MangaInfoActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -293,7 +294,7 @@ public class MangaInfoActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
